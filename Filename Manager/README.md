@@ -19,6 +19,9 @@ Currently, the GUI version does not print a list of extensions.
 You would have to know the extension of the files you want to alter when prompted. 
 Use the non-GUI version if you want the list printed.
 ```
+## Download Executables
+* <a href="https://github.com/need4swede/Powershell-Scripts/releases/download/v1.0/Filename.Manager.exe">Filename Manager (v1.0)</a>
+* <a href="https://github.com/need4swede/Powershell-Scripts/releases/download/v1.0/Filename.Manager.GUI.exe">Filename Manager w/ GUI (v1.0)</a>
 
 ## Change Log
 
