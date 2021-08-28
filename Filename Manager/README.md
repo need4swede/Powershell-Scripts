@@ -10,10 +10,6 @@ PS script that lets you browse to a folder, list what filetypes (extensions) are
 * Add a suffix to file names
 * Remove text from file names
 
-### Dependencies
-
-* Copy of Windows (32-bit/64-bit) with Powershell
-
 ```
 Currently, the GUI version does not print a list of extensions. 
 You would have to know the extension of the files you want to alter when prompted. 
