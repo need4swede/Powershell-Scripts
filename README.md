@@ -10,7 +10,7 @@ Some powershell scripts that I've made that can be useful to automate certain ta
 
 ## List of Scripts
 
-### ' File Manager '
+### ' Filename Manager '
 
 * Add a prefix to the name of a batch of files of a given filetype within a chosen directory
 * Add a suffix to the name of a batch of files of a given filetype within a chosen directory
