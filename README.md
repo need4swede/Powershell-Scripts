@@ -10,7 +10,7 @@ Some powershell scripts that I've made that can be useful to automate certain ta
 
 ## List of Scripts
 
-### ' Filename Manager '
+### <a href="https://github.com/need4swede/Powershell-Scripts/tree/main/Filename%20Manager">' Filename Manager '</a>
 
 * Add a prefix to the name of a batch of files of a given filetype within a chosen directory
 * Add a suffix to the name of a batch of files of a given filetype within a chosen directory
