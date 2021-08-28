@@ -30,7 +30,3 @@ Use the non-GUI version if you want the list printed.
     * Print list of extensions found in directory via GUI
 * 1.2
     * Ask user if they would like to ammend a different filetype within the same dir before exiting script
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE.md file for details
