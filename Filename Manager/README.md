@@ -15,7 +15,8 @@ PS script that lets you browse to a folder, list what filetypes (extensions) are
 * Copy of Windows (32-bit/64-bit) with Powershell
 
 ```
-Currently, the GUI version does not print a list of extensions, so you would have to know the extension of the files you want to alter when prompted. 
+Currently, the GUI version does not print a list of extensions. 
+You would have to know the extension of the files you want to alter when prompted. 
 Use the non-GUI version if you want the list printed.
 ```
 
