@@ -1,6 +1,6 @@
 # Print Server Manager
 
-PS script that lets you query all printers in a print server and output them in a simple GUI for easy installs
+PS script that lets you query all printers in a print server and output them in a simple GUI for easy installs.
 Great for home users with advanced printer setups or IT Admins.
 I was able to compile this into an executable and host it on a fileshare and distribute it to our org via GPO and our users have been using it to install and manage their printers. 
 
