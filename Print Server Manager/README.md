@@ -17,7 +17,6 @@ There's a footnote section that let's you include your own disclaimer.
 Be sure to replace every mention of the phrase PRINTSERVER with the IP/Name of your print server.
 If the aforementioned PRINTSERVER in the code doesn't include '' or "", then don't add them when updating my code.
 If you see 'PRINTSERVER' or "PRINTSERVER", then keep the quotation marks and insert the IP/Name of your server.
-
 ```
 ## Download Executables
 * None Available
