@@ -30,7 +30,7 @@ while ( $true ) {
 
 # Main Window
 $window = New-Object System.Windows.Forms.Form
-$window.Text = "WINDOW TITLE"
+$window.Text = "Print Server Manager"
 $window.Size = New-Object System.Drawing.Size(500, 400)
 $window.StartPosition = 'CenterScreen'
 
