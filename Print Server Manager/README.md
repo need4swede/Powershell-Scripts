@@ -19,7 +19,7 @@ If the aforementioned PRINTSERVER in the code doesn't include '' or "", then don
 If you see 'PRINTSERVER' or "PRINTSERVER", then keep the quotation marks and insert the IP/Name of your server.
 ```
 ## Print Server Manager PS1
-```
+```powershell
 ##### Powershell Printer Management Tool #####
 
 <#
