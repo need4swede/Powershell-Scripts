@@ -1,6 +1,6 @@
 # Useful Powershell Scripts
 
-Some powershell scripts that I've made that can be useful to automate certain tasks within Windows. Some of these have GUI versions available, but most of them run within a terminal. 
+Some powershell scripts that I've made that can be useful to automate certain tasks within Windows. Hope they'll prove useful to some of you. Cheers!
 
 ## Getting Started
 
