@@ -69,7 +69,7 @@ $listBox = New-Object System.Windows.Forms.ListBox
 $listBox.Location = New-Object System.Drawing.Point(10,60)
 $listBox.Size = New-Object System.Drawing.Size(260,20)
 $listBox.Height= 280
-$micro = "Microsoft XPS Document Writer"
+$micro = "Microsoft XPS Document Writer" # Excludes the default XPS Document Writer from the available list of printers
 Get-Printer -ComputerName "\\PRINTSERVER" | Sort-Object | Where-Object{$_.Name -ne $micro} |ForEach-Object { $listBox.Items.Add($_.Name)}
 
 # Main Window Properties
@@ -89,11 +89,10 @@ if ($result -eq [System.Windows.Forms.DialogResult]::Cancel)
 
 # Install Function
 if ($result -eq [System.Windows.Forms.DialogResult]::OK){
-
-    # Variable for selected printer
-    $x = $listBox.SelectedItem
+    $x = $listBox.SelectedItem # Variable for selected printer
+    
     # Checks if a printer was selected before install
-    if (!$x){
+    if (!$x){ 
         $b = new-object -comobject wscript.shell
         $b.popup("No printer was selected. Please select a printer and then click install.", `
         0,"No Printer Selected!",0)
@@ -101,8 +100,7 @@ if ($result -eq [System.Windows.Forms.DialogResult]::OK){
 
     # Edits system registry to allow for local default printer management
     New-ItemProperty -LiteralPath 'Registry::HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Windows' -Name  'LegacyDefaultPrinterMode' -Value '00000001' -PropertyType 'DWORD' –Force
-    # Get out of the Registry
-    Pop-Location
+    Pop-Location # Get out of the Registry
 
     # Checks if the selected printer is already installed on the system
     $printers = Get-Printer
