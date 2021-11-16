@@ -18,7 +18,7 @@ Some powershell scripts that I've made that can be useful to automate certain ta
 
 ### <a href="https://github.com/need4swede/Powershell-Scripts/tree/main/Print%20Server%20Manager">' Print Server Manager '</a>
 
-* Install printers stored on a print server with a simply and user friendly GUI
+* Install printers stored on a print server with a simple and user friendly GUI
 * Detect if a printer is currently installed and ask if user wants to remove and re-install it
 * Option to add newly installed printer as user default
 
