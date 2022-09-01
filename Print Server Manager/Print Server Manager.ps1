@@ -1,4 +1,4 @@
-﻿##### Powershell Printer Management Tool #####
+﻿ ##### Powershell Printer Management Tool #####
 
 <#
 The MIT License (MIT)
@@ -24,11 +24,72 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #>
 
 <#
-Replace all instances of 'PRINTSERVERADDRESS' with the IP of your print server!
+Replace '<blank>' with the name of your IT Department on line 129
 #>
 
+function loadPrintServer ($title,$enterIP) {
+
+###################Load Assembly for creating form & button######
+
+[void][System.Reflection.Assembly]::LoadWithPartialName( “System.Windows.Forms”)
+[void][System.Reflection.Assembly]::LoadWithPartialName( “Microsoft.VisualBasic”)
+
+#####Define the form size & placement
+
+$enterIP_Window = New-Object “System.Windows.Forms.Form”;
+$enterIP_Window.Width = 300;
+$enterIP_Window.Height = 130;
+$enterIP_Window.Text = $title;
+$enterIP_Window.StartPosition = [System.Windows.Forms.FormStartPosition]::CenterScreen;
+
+############## IP Text Label
+$enterIP_Label = New-Object “System.Windows.Forms.Label”;
+$enterIP_Label.Left = 25;
+$enterIP_Label.Top = 15;
+$enterIP_Label.width = 115;
+
+$enterIP_Label.Text = $enterIP;
+
+############ IP Input Textbox
+$enterIP_Textbox = New-Object “System.Windows.Forms.TextBox”;
+$enterIP_Textbox.Left = 150;
+$enterIP_Textbox.Top = 10;
+$enterIP_Textbox.width = 100;
+
+############# Set IP Input Placeholder Text
+$enterIP_Textbox_placeholderText = “192.168.”
+$enterIP_Textbox.Text = $enterIP_Textbox_placeholderText;
+
+############# Create OK Button
+$enterIP_okButton = New-Object “System.Windows.Forms.Button”;
+$enterIP_okButton.Left = 175;
+$enterIP_okButton.Top = 45;
+$enterIP_okButton.Width = 75;
+$enterIP_okButton.Text = “Ok”;
+
+############# This is when you have to close the form after getting values
+$eventHandler = [System.EventHandler]{
+$enterIP_Textbox.Text;
+$enterIP_Window.Close();};
+
+$enterIP_okButton.Add_Click($eventHandler) ;
+
+#############Add controls to all the above objects defined
+$enterIP_Window.Controls.Add($enterIP_okButton);
+$enterIP_Window.Controls.Add($enterIP_Label);
+$enterIP_Window.Controls.Add($enterIP_Textbox);
+$ret = $enterIP_Window.ShowDialog();
+
+#################return values
+return $enterIP_Textbox.Text
+}
+
+$getPrintServerIP= loadPrintServer “Load Print Server” “Print Server Address: ”
+
+$PrintServerAddress = $getPrintServerIP
+
 ### Main Function ###
-function PrintManager() {
+function PrintManager($PrintServerAddress) {
 while ( $true ) {
 
 # Main Window
@@ -73,7 +134,7 @@ $listBox.Location = New-Object System.Drawing.Point(10,60)
 $listBox.Size = New-Object System.Drawing.Size(260,20)
 $listBox.Height= 280
 $micro = "Microsoft XPS Document Writer" # Excludes the default XPS Document Writer from the available list of printers
-Get-Printer -ComputerName "\\PRINTSERVERADDRESS" | Sort-Object | Where-Object{$_.Name -ne $micro} |ForEach-Object { $listBox.Items.Add($_.Name)}
+Get-Printer -ComputerName "\\$PrintServerAddress" | Sort-Object | Where-Object{$_.Name -ne $micro} |ForEach-Object { $listBox.Items.Add($_.Name)}
 
 # Main Window Properties
 $window.TopMost = $true
@@ -107,14 +168,14 @@ if ($result -eq [System.Windows.Forms.DialogResult]::OK){
 
     # Checks if the selected printer is already installed on the system
     $printers = Get-Printer
-    if ($printers.Name -like "\\PRINTSERVERADDRESS\$x")
+    if ($printers.Name -like "\\$PrintServerAddress\$x")
     {
         $rmv = new-object -comobject wscript.shell
         $intAnswer = $rmv.popup("The $x is already an installed printer on your system. Would you like to remove and re-add this printer?", `
         0,"Printer Found!",4)
         If ($intAnswer -eq 6) {    
             # Removes the printer
-            Remove-Printer -Name  "\\PRINTSERVERADDRESS\$x"
+            Remove-Printer -Name  "\\$PrintServerAddress\$x"
             $rmv.popup("The $x has now been removed and will be re-installed on your system.", `
             0,"Printer Removed",0)
             } else {
@@ -124,7 +185,7 @@ if ($result -eq [System.Windows.Forms.DialogResult]::OK){
     }
 
     ## Install selected printer w/ UI timer
-    Add-Printer -ConnectionName \\PRINTSERVERADDRESS\$x
+    Add-Printer -ConnectionName \\$PrintServerAddress\$x
 
     #Adjust timer delay here
     $delay = 20
@@ -174,7 +235,7 @@ if ($result -eq [System.Windows.Forms.DialogResult]::OK){
 
     # Checks if the printer installed successfully
     $printers = Get-Printer
-    if ($printers.Name -like "\\PRINTSERVERADDRESS\$x")
+    if ($printers.Name -like "\\$PrintServerAddress\$x")
     {   
         # SUCCESSFUL INSTALL
 
@@ -184,7 +245,7 @@ if ($result -eq [System.Windows.Forms.DialogResult]::OK){
         0,"Set as Default",4)
         If ($intAnswer -eq 6) { 
         Start-Sleep -s 3
-        RUNDLL32 PRINTUI.DLL,PrintUIEntry /y /n \\PRINTSERVERADDRESS\$x
+        RUNDLL32 PRINTUI.DLL,PrintUIEntry /y /n \\$PrintServerAddress\$x
         $a.popup("The $x is now your default printer! You can change this setting at any time.")
         } else {}
     } 
@@ -214,4 +275,4 @@ if ($result -eq [System.Windows.Forms.DialogResult]::OK){
         }
                       }}
 
-PrintManager
+PrintManager($PrintServerAddress) 
