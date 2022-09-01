@@ -22,7 +22,10 @@ COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
 IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #>
- 
+
+<#
+Replace all instances of 'PRINTSERVERADDRESS' with the IP of your print server!
+#>
 
 ### Main Function ###
 function PrintManager() {
@@ -70,7 +73,7 @@ $listBox.Location = New-Object System.Drawing.Point(10,60)
 $listBox.Size = New-Object System.Drawing.Size(260,20)
 $listBox.Height= 280
 $micro = "Microsoft XPS Document Writer" # Excludes the default XPS Document Writer from the available list of printers
-Get-Printer -ComputerName "\\PRINTSERVER" | Sort-Object | Where-Object{$_.Name -ne $micro} |ForEach-Object { $listBox.Items.Add($_.Name)}
+Get-Printer -ComputerName "\\PRINTSERVERADDRESS" | Sort-Object | Where-Object{$_.Name -ne $micro} |ForEach-Object { $listBox.Items.Add($_.Name)}
 
 # Main Window Properties
 $window.TopMost = $true
@@ -104,14 +107,14 @@ if ($result -eq [System.Windows.Forms.DialogResult]::OK){
 
     # Checks if the selected printer is already installed on the system
     $printers = Get-Printer
-    if ($printers.Name -like "\\PRINTSERVER\$x")
+    if ($printers.Name -like "\\PRINTSERVERADDRESS\$x")
     {
         $rmv = new-object -comobject wscript.shell
         $intAnswer = $rmv.popup("The $x is already an installed printer on your system. Would you like to remove and re-add this printer?", `
         0,"Printer Found!",4)
         If ($intAnswer -eq 6) {    
             # Removes the printer
-            Remove-Printer -Name  "\\PRINTSERVER\$x"
+            Remove-Printer -Name  "\\PRINTSERVERADDRESS\$x"
             $rmv.popup("The $x has now been removed and will be re-installed on your system.", `
             0,"Printer Removed",0)
             } else {
@@ -121,7 +124,7 @@ if ($result -eq [System.Windows.Forms.DialogResult]::OK){
     }
 
     ## Install selected printer w/ UI timer
-    Add-Printer -ConnectionName \\PRINTSERVER\$x
+    Add-Printer -ConnectionName \\PRINTSERVERADDRESS\$x
 
     #Adjust timer delay here
     $delay = 20
@@ -171,7 +174,7 @@ if ($result -eq [System.Windows.Forms.DialogResult]::OK){
 
     # Checks if the printer installed successfully
     $printers = Get-Printer
-    if ($printers.Name -like "\\PRINTSERVER\$x")
+    if ($printers.Name -like "\\PRINTSERVERADDRESS\$x")
     {   
         # SUCCESSFUL INSTALL
 
@@ -181,7 +184,7 @@ if ($result -eq [System.Windows.Forms.DialogResult]::OK){
         0,"Set as Default",4)
         If ($intAnswer -eq 6) { 
         Start-Sleep -s 3
-        RUNDLL32 PRINTUI.DLL,PrintUIEntry /y /n \\PRINTSERVER\$x
+        RUNDLL32 PRINTUI.DLL,PrintUIEntry /y /n \\PRINTSERVERADDRESS\$x
         $a.popup("The $x is now your default printer! You can change this setting at any time.")
         } else {}
     } 
