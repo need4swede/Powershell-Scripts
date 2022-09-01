@@ -15,7 +15,7 @@ GPO and our users have been using it to install and manage their printers.
 * Adjustable delay with prompt for install duration
 
 ## Download Executables
-* <a href="https://github.com/need4swede/Powershell-Scripts/releases/download/v2.0/Print_Server_Manager.exe">Print Server Manager (v2.0)</a>
+* <a href="https://github.com/need4swede/Powershell-Scripts/releases/download/v2.0/Print_Server_Manager.exe">Print Server Manager v2.0</a>
 
 ## Change Log
 
