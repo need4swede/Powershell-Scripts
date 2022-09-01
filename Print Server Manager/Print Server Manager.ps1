@@ -66,6 +66,7 @@ $enterIP_okButton.Left = 175;
 $enterIP_okButton.Top = 45;
 $enterIP_okButton.Width = 75;
 $enterIP_okButton.Text = “Ok”;
+$enterIP_Window.AcceptButton = $enterIP_okButton 
 
 ############# This is when you have to close the form after getting values
 $eventHandler = [System.EventHandler]{
@@ -121,12 +122,12 @@ $label.Size = New-Object System.Drawing.Size(320,20)
 $label.Font = New-Object System.Drawing.Font("Franklin Gothic",12,[System.Drawing.FontStyle]::Regular)
 $label.Text = 'Select printer from the list and click install'
 
-# IT Disclaimer
+# Credit Section
 $label2 = New-Object System.Windows.Forms.Label
 $label2.Location = New-Object System.Drawing.Point(280,300)
 $label2.Size = New-Object System.Drawing.Size(200,50)
 $label2.Font = New-Object System.Drawing.Font("Franklin Gothic",7,[System.Drawing.FontStyle]::Regular)
-$label2.Text = "This application was developed by the <blank> IT Department. For all inquiries, please contact us via <contact>."
+$label2.Text = "https://github.com/need4swede." 
 
 # Print Server UI Output
 $listBox = New-Object System.Windows.Forms.ListBox
