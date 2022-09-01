@@ -169,17 +169,35 @@ if ($result -eq [System.Windows.Forms.DialogResult]::OK){
     }
     $Counter_Form.Close() 
 
-    # Asks user if they want the printer to be their new default
-    $a = new-object -comobject wscript.shell
-    $intAnswer = $a.popup("Set the $x as your default printer?", `
-    0,"Set as Default",4)
-    If ($intAnswer -eq 6) {    
-    Start-Sleep -s 3
-    RUNDLL32 PRINTUI.DLL,PrintUIEntry /y /n \\PRINTSERVER\$x
-    $a.popup("The $x is now your default printer! You can change this setting at any time.")
-    } else {
-  
-    }
+    # Checks if the printer installed successfully
+    $printers = Get-Printer
+    if ($printers.Name -like "\\PRINTSERVER\$x")
+    {   
+        # SUCCESSFUL INSTALL
+
+        # Asks user if they want the printer to be their new default
+        $a = new-object -comobject wscript.shell
+        $intAnswer = $a.popup("Set the $x as your default printer?", `
+        0,"Set as Default",4)
+        If ($intAnswer -eq 6) { 
+        Start-Sleep -s 3
+        RUNDLL32 PRINTUI.DLL,PrintUIEntry /y /n \\PRINTSERVER\$x
+        $a.popup("The $x is now your default printer! You can change this setting at any time.")
+        } else {}
+    } 
+    else {
+
+        # FAILED INSTALL
+
+        Add-Type -AssemblyName PresentationCore,PresentationFramework
+        $ButtonType = [System.Windows.MessageBoxButton]::Ok
+        $MessageIcon = [System.Windows.MessageBoxImage]::Error
+        $MessageBody = "Printer Manager was unable to install $x. Please contact IT for support."
+        $MessageTitle = "Install Failed"
+        $Result = [System.Windows.MessageBox]::Show($MessageBody,$MessageTitle,$ButtonType,$MessageIcon)
+        exit
+
+} 
 } 
     # Restart program
     $re = new-object -comobject wscript.shell
